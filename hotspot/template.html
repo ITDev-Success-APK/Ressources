@@ -1,0 +1,231 @@
+<style>
+    .voucher {
+        width: 220px;
+        padding: 15px;
+        border: 2px solid #000;
+        border-radius: 10px;
+        font-family: 'Arial', sans-serif;
+        background: white;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+    }
+
+    .header {
+        text-align: center;
+        padding: 15px 0;
+        background: #abb2b9;
+        border-radius: 8px;
+        margin-bottom: 12px;
+        border-bottom: 2px solid #ff9a03;
+    }
+
+    .logo-img {
+        height: 120px;
+        margin-bottom: 5px;
+    }
+
+    .ticket-number {
+        font-size: 12px;
+        color: #666;
+        margin-top: 5px;
+    }
+
+    .credentials-box {
+        background: #f8f8f8;
+        padding: 10px;
+        border-radius: 8px;
+        margin: 10px 0;
+    }
+
+    .label {
+        font-size: 11px;
+        color: #000;
+        text-transform: uppercase;
+        margin-bottom: 3px;
+        font-weight: bold;
+    }
+
+    .value {
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-weight: bold;
+        font-size: 14px;
+        background: white;
+        margin-bottom: 8px;
+        text-align: center;
+        letter-spacing: 1px;
+    }
+
+    .qrcode {
+        height: 90px;
+        width: 90px;
+        margin: 10px auto;
+        display: block;
+        padding: 5px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background: white;
+    }
+
+    .package-info {
+        margin: 15px 0;
+        padding: 10px;
+        border: 1px solid #ff9a03;
+        border-radius: 8px;
+        background: #fff;
+    }
+
+    .info-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+        margin-bottom: 10px;
+    }
+
+    .info-item {
+        text-align: center;
+    }
+
+    .info-label {
+        font-size: 10px;
+        color: #666;
+        text-transform: uppercase;
+    }
+
+    .info-value {
+        font-size: 12px;
+        font-weight: bold;
+        color: #000;
+    }
+
+    .price {
+        text-align: center;
+        font-size: 18px;
+        font-weight: bold;
+        color: #ff9a03;
+        margin: 10px 0;
+    }
+
+    .login-info {
+        text-align: center;
+        font-size: 12px;
+        color: #000;
+        padding: 8px;
+        background: #f8f8f8;
+        border-radius: 6px;
+        margin: 10px 0;
+    }
+
+    .contact-info {
+        text-align: center;
+        font-size: 11px;
+        margin-top: 10px;
+        padding-top: 10px;
+        border-top: 1px dashed #ddd;
+    }
+
+    .phone {
+        color: #ff9a03;
+        font-weight: bold;
+    }
+
+    .note {
+        font-size: 10px;
+        color: #666;
+        text-align: center;
+        margin-top: 8px;
+    }
+</style>
+
+<table class="voucher">
+    <tbody>
+        <tr>
+            <td>
+                <div class="header">
+                    <img src="<?= $logo; ?>" alt="logo" class="logo-img">
+                    <div class="ticket-number">Ticket
+                        <?= " [$num]"; ?>
+                    </div>
+                </div>
+
+                <div class="credentials-box">
+                    <?php if ($usermode == "vc") { ?>
+                    <div class="label">Code Promo</div>
+                    <div class="value">
+                        <?= $username; ?>
+                    </div>
+                    <?php } elseif ($usermode == "up") { ?>
+                    <?php if ($qr == "yes") { ?>
+                    <div class="label">Nom d'Utilisateur</div>
+                    <div class="value">
+                        <?= $username; ?>
+                    </div>
+                    <div class="label">Mot de Passe</div>
+                    <div class="value">
+                        <?= $password; ?>
+                    </div>
+                    <div class="qrcode">
+                        <?= $qrcode ?>
+                    </div>
+                    <?php } else { ?>
+                    <div class="label">Nom d'Utilisateur</div>
+                    <div class="value">
+                        <?= $username; ?>
+                    </div>
+                    <div class="label">Mot de Passe</div>
+                    <div class="value">
+                        <?= $password; ?>
+                    </div>
+                    <?php } ?>
+                    <?php } ?>
+                </div>
+
+                <div class="package-info">
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-label">Validité</div>
+                            <div class="info-value">
+                                <?= $validity; ?>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Temps</div>
+                            <div class="info-value">
+                                <?= $timelimit; ?>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Data</div>
+                            <div class="info-value">
+                                <?= $datalimit; ?>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Utilisateurs</div>
+                            <div class="info-value">
+                                <?= $profile; ?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="price">
+                        <?= $price; ?>
+                    </div>
+                </div>
+
+                <div class="login-info">
+                    Login: http://
+                    <?= $dnsname; ?>
+                </div>
+
+                <div class="contact-info">
+                    <div class="phone">0387265705 - 0337651232</div>
+                    Besoin d'aide ? Contactez-nous !
+                </div>
+
+                <div class="note">
+                    Merci de votre confiance !
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>

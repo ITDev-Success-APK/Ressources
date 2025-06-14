@@ -1,0 +1,122 @@
+name: wimazone
+services:
+  wimazone:
+    cpu_shares: 90
+    command:
+      - /usr/bin/supervisord
+      - -c
+      - /etc/supervisor/conf.d/supervisord.conf
+    deploy:
+      resources:
+        limits:
+          memory: 1932M
+    environment:
+      - DB_DATABASE=wimazone
+      - DB_PASSWORD=AllahSeul@2001
+      - DB_USERNAME=wimazone
+      - PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+      - RADIUS_CLIENT=0.0.0.0
+      - RADIUS_LOG_AUTH=yes 
+      - RADIUS_SECRET=wimazone
+      - ROOT_PASSWORD=AllahSeul@2001
+      - TIME_ZONE=Indian/Antananarivo
+    image: agstr/pnb:latest
+    labels:
+      icon: https://raw.githubusercontent.com/hotspotbilling/phpnuxbill/master/ui/ui/images/logo.png
+    ports:
+      - target: 1812
+        published: "1812"
+        protocol: udp
+      - target: 1813
+        published: "1813"
+        protocol: udp
+      - target: 22
+        published: "922"
+        protocol: tcp
+      - target: 3306
+        published: "9306"
+        protocol: tcp
+      - target: 80
+        published: "9980"
+        protocol: tcp
+    privileged: true
+    restart: unless-stopped
+    volumes:
+      - /DATA/AppData/wimazone/html:/var/www/html
+      - /DATA/AppData/wimazone/mysql:/var/lib/mysql
+    devices: []
+    cap_add: []
+    network_mode: bridge
+    container_name: wimazone
+    hostname: wimazone
+    x-casaos:
+      envs:
+        - container: DB_USERNAME
+          description:
+            fr_fr: Nom d'utilisateur de la base de données
+        - container: DB_PASSWORD
+          description:
+            fr_fr: Mot de passe de la base de données
+        - container: TIME_ZONE
+          description:
+            fr_fr: Fuseau horaire du serveur
+        - container: ROOT_PASSWORD
+          description:
+            fr_fr: Mot de passe root du système
+        - container: RADIUS_SECRET
+          description:
+            fr_fr: Clé secrète RADIUS
+        - container: RADIUS_CLIENT
+          description:
+            fr_fr: Client autorisé RADIUS
+        - container: RADIUS_LOG_AUTH
+          description:
+            fr_fr: Activer les logs d'authentification RADIUS
+        - container: DB_DATABASE
+          description:
+            fr_fr: Nom de la base de données
+        - container: PATH
+          description:
+            fr_fr: Variables d’environnement système
+      ports:
+        - container: "1812"
+          description:
+            fr_fr: Port d'authentification RADIUS
+        - container: "1813"
+          description:
+            fr_fr: Port d'acquittement RADIUS
+        - container: "22"
+          description:
+            fr_fr: Accès SSH
+        - container: "3306"
+          description:
+            fr_fr: Port MySQL
+        - container: "80"
+          description:
+            fr_fr: Port HTTP (interface utilisateur)
+x-casaos:
+  architectures:
+    - amd64
+    - arm
+    - arm64
+  author: Wima Zone
+  category: facturation
+  description:
+    fr_fr: Solution de gestion et de facturation RADIUS pour Wima Zone
+  developer: Wima Zone
+  hostname: wimazone
+  icon: https://raw.githubusercontent.com/hotspotbilling/phpnuxbill/master/ui/ui/images/logo.png
+  index: /
+  is_uncontrolled: false
+  main: wimazone
+  port_map: "9980"
+  scheme: http
+  store_app_id: wimazone
+  tagline:
+    fr_fr: Application de gestion des abonnés internet Wima Zone
+  thumbnail: ""
+  tips:
+    custom: Converti depuis une ancienne application CasaOS
+  title:
+    custom: Wima Zone
+    fr_fr: Wima Zone

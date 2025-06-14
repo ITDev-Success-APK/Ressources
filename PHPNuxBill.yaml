@@ -1,0 +1,122 @@
+name: phpnuxbill
+services:
+  pnbrad:
+    cpu_shares: 90
+    command:
+      - /usr/bin/supervisord
+      - -c
+      - /etc/supervisor/conf.d/supervisord.conf
+    deploy:
+      resources:
+        limits:
+          memory: 1932M
+    environment:
+      - DB_DATABASE=wimazone
+      - DB_PASSWORD=AllahSeul@2001
+      - DB_USERNAME=wimazone
+      - PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+      - RADIUS_CLIENT=0.0.0.0
+      - RADIUS_LOG_AUTH=yes 
+      - RADIUS_SECRET=wimazone
+      - ROOT_PASSWORD=AllahSeul@2001
+      - TIME_ZONE=Indian/Antananarivo
+    image: agstr/pnb:latest
+    labels:
+      icon: https://raw.githubusercontent.com/hotspotbilling/phpnuxbill/master/ui/ui/images/logo.png
+    ports:
+      - target: 1812
+        published: "1812"
+        protocol: udp
+      - target: 1813
+        published: "1813"
+        protocol: udp
+      - target: 22
+        published: "922"
+        protocol: tcp
+      - target: 3306
+        published: "9306"
+        protocol: tcp
+      - target: 80
+        published: "9980"
+        protocol: tcp
+    privileged: true
+    restart: unless-stopped
+    x-casaos:
+      envs:
+        - container: DB_USERNAME
+          description:
+            en_us: ""
+        - container: DB_PASSWORD
+          description:
+            en_us: ""
+        - container: TIME_ZONE
+          description:
+            en_us: ""
+        - container: ROOT_PASSWORD
+          description:
+            en_us: ""
+        - container: RADIUS_SECRET
+          description:
+            en_us: ""
+        - container: RADIUS_CLIENT
+          description:
+            en_us: ""
+        - container: RADIUS_LOG_AUTH
+          description:
+            en_us: ""
+        - container: DB_DATABASE
+          description:
+            en_us: ""
+        - container: PATH
+          description:
+            en_us: ""
+      ports:
+        - container: "1812"
+          description:
+            en_us: ""
+        - container: "1813"
+          description:
+            en_us: ""
+        - container: "22"
+          description:
+            en_us: ""
+        - container: "3306"
+          description:
+            en_us: ""
+        - container: "80"
+          description:
+            en_us: ""
+    volumes: []
+    devices: []
+    cap_add: []
+    network_mode: bridge
+    container_name: ""
+    hostname: ""
+x-casaos:
+  architectures:
+    - amd64
+    - arm
+    - arm64
+  author: AGSTRxyz
+  category: unknown
+  description:
+    en_us: ""
+  developer: unknown
+  hostname: 
+  icon: https://raw.githubusercontent.com/hotspotbilling/phpnuxbill/master/ui/ui/images/logo.png
+  index: /
+  is_uncontrolled: false
+  main: pnbrad
+  port_map: "9980"
+  scheme: http
+  store_app_id: pnbrad
+  tagline:
+    en_us: This is a compose app converted from a legacy app (CasaOS v0.4.3 or
+      earlier)
+  thumbnail: ""
+  tips:
+    custom: This is a compose app converted from a legacy app (CasaOS v0.4.3 or
+      earlier)
+  title:
+    custom: ""
+    en_us: PHPNuxBill

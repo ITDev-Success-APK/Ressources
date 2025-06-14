@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="theme-color" content="#3B5998" />
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
+    <title id="title"></title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="font/css/all.min.css">
+    <link rel="icon" href="images/favicon.png" />
+    $(if refresh-timeout)
+    <script>
+        setTimeout(function() {
+            location.href = './status';
+        }, 1500);
+    </script>
+    $(endif)
+    <style>
+        .icon-container {
+            text-align: center;
+        }
+        .svg-success {
+            width: 80px;
+            height: 80px;
+            fill: #ff9a03;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="icon-container">
+            <svg xmlns="http://www.w3.org/2000/svg" class="svg-success" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm3.61 5.69l-4 4a.5.5 0 0 1-.72 0l-2-2a.5.5 0 1 1 .72-.7l1.47 1.47 3.47-3.47a.5.5 0 1 1 .7.7z"/></svg>
+        </div>
+            
+        $(if login-by == 'trial')
+        <div style="margin-top:20px; text-align: center;">
+            <h3>Bienvenue</h3>
+            <i style="font-size:150px;" class="fas fa-user-circle"></i>
+            <h3>Utilisateur d'essai</h3>
+        </div><br>
+        $(elif login-by != 'mac')
+        <div style="margin-top:20px; text-align: center;">
+            <h3>Bienvenue</h3>
+            <i style="font-size:150px;" class="fas fa-user-circle"></i><br>
+            <h3 id="user">$(username)</h3>
+        </div><br>
+        $(endif)
+
+        <h3>Vous êtes connecté au réseau de <br /><b id="dname"></b></h3>
+
+        <!-- Bouton traduit -->
+        <button class="button" onclick="window.location='./status'">
+            <i class="fas fa-check"> </i> Vérifier l'état
+        </button>
+    </div>
+
+    <script type="text/javascript">
+        document.getElementById('title').innerHTML = window.location.hostname + " > Connexion réussie";    
+        document.getElementById('dname').innerHTML = window.location.hostname;
+    </script>
+</body>
+</html>

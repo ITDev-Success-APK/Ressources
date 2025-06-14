@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="iso-8859-1">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="expires" content="-1">
+    <meta name="theme-color" content="#3B5998" />
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
+    <title>mikrotik hotspot > erreur</title>
+    <link rel="stylesheet" href="styles/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="icon" href="images/favicon.png" />
+    <style type="text/css">
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #737373;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        table {
+            width: 100%;
+            height: 100%;
+            text-align: center;
+        }
+
+        td {
+            font-size: 16px;
+            color: #7a7a7a;
+        }
+
+        h2 {
+            color: #3b5998;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        a {
+            color: #3b5998;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .error-message {
+            font-size: 18px;
+            color: #ff0000;
+            margin-bottom: 15px;
+        }
+
+        .link-container {
+            margin-top: 20px;
+        }
+
+        .link-container a {
+            color: #3b5998;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <tr>
+            <td align="center" valign="middle">
+                <h2>Erreur de Wima Zone</h2>
+                <div class="error-message">Erreur : $(error)</div>
+                <div class="link-container">
+                    <p>Page de connexion : <a href="$(link-login)">Cliquez ici pour vous connecter</a></p>
+                </div>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

@@ -1,0 +1,96 @@
+# Ce fichier contient les messages d'erreur affichés aux utilisateurs lors de l'utilisation de connexions http/https.
+# Ces messages peuvent être modifiés pour rendre l'interface utilisateur plus conviviale, y compris les traductions dans différentes langues.
+#
+# De nombreuses variables peuvent être utilisées ici. Voici les plus courantes :
+# $(error-orig)  - message d'erreur original provenant du hotspot
+# $(ip)          - adresse IP du client
+# $(username)    - nom d'utilisateur de la personne tentant de se connecter
+
+# internal-error
+# Cela ne devrait jamais se produire. Si cela se produit, une page avec un message d'erreur sera affichée
+# avec ce message d'erreur (error-orig expliquera ce qui s'est passé).
+
+internal-error = Erreur interne ($(error-orig)), veuillez contacter notre support technique !
+
+# config-error
+# Cela ne devrait jamais se produire si le hotspot est correctement configuré.
+
+config-error = Erreur de configuration ($(error-orig)), veuillez contacter notre support technique !
+
+# not-logged-in
+# Cela se produit si la page de statut ou de déconnexion est demandée par un utilisateur qui n'est pas encore connecté.
+
+not-logged-in = Vous n'êtes pas connecté (ip $(ip))
+
+# ippool-empty
+# L'adresse IP pour l'utilisateur devrait être fournie par le pool d'IP, mais il n'y a plus d'adresse disponible dans ce pool.
+
+ippool-empty = Impossible de fournir une adresse IP - plus d'adresses disponibles dans le pool
+
+# shutting-down
+# Si le hotspot est en train de fermer, aucun nouveau client ne sera accepté.
+
+shutting-down = Le service hotspot Wima Zone est en cours de fermeture
+
+# user-session-limit
+# Si une limite est définie pour les utilisateurs répartis par profil utilisateur, ce message d'erreur apparaîtra
+# lorsqu'ils atteindront cette limite.
+
+user-session-limit = Le code utilisateur $(username) est déjà actif
+
+# license-session-limit
+# Selon la licence, le nombre de clients actifs sur le hotspot est limité
+# à un certain nombre. Si ce nombre est atteint, ce message d'erreur apparaîtra.
+
+license-session-limit = La durée de votre promotion est terminée ($(error-orig))
+
+# wrong-mac-username
+# Si le nom d'utilisateur est identique à l'adresse MAC (12:34:56:78:9a:bc) mais n'est pas
+# l'adresse MAC du client, la connexion est refusée.
+
+wrong-mac-username = Code utilisateur non valide ($(username)) : cet adresse MAC ne vous appartient pas
+
+# chap-missing
+# Si la méthode de connexion http-chap est utilisée, mais que le hotspot ne reçoit pas le mot de passe
+# enregistré depuis le navigateur web, ce message d'erreur s'affichera. Les raisons possibles sont :
+#   - JavaScript désactivé dans le navigateur ;
+#   - La page login.html est invalide ;
+#   - Le challenge de l'heure a expiré sur le serveur (plus d'une heure sans activité) ;
+#   - La méthode http-chap a été récemment réinitialisée ;
+# Si JavaScript est activé et que la page login.html est valide, réessayer régulièrement peut résoudre ce problème.
+
+chap-missing = Le navigateur web n'a pas envoyé la réponse au challenge (veuillez réessayer, activez JavaScript)
+
+# invalid-username
+# Cas général de nom d'utilisateur ou de mot de passe invalide. Si un message d'erreur Access-Reject
+# est renvoyé par le serveur RADIUS, ce paramètre sera remplacé.
+
+invalid-username = Votre ticket n'est pas activé ou invalide. Connecter vous à votre espace client.
+
+# invalid-mac
+# Un utilisateur local (sur le serveur hotspot) peut être associé à une adresse MAC spécifique. Si une connexion
+# est tentée avec une autre adresse MAC, ce message d'erreur s'affichera.
+
+invalid-mac = Code utilisateur $(username) non valide pour cette adresse MAC
+
+# uptime-limit, traffic-limit
+# Pour les utilisateurs locaux sur le hotspot si les limites de temps ou de trafic sont dépassées.
+
+uptime-limit = Code utilisateur $(username) a atteint la limite de temps
+traffic-limit = Code utilisateur $(username) a atteint la limite de données
+
+# radius-timeout
+# Si le serveur RADIUS vérifie l'utilisateur mais ne répond pas, ce message d'erreur s'affichera.
+
+radius-timeout = Le serveur RADIUS ne répond pas, veuillez contacter notre support technique !
+
+# auth-in-progress
+# L'authentification est déjà en cours. Le client a déjà envoyé une demande d'authentification,
+# mais celle-ci n'est pas encore terminée.
+
+auth-in-progress = Authentification en cours, veuillez réessayer dans quelques instants
+
+# radius-reply
+# Le serveur Radius a envoyé un message d'erreur spécifique
+
+radius-reply = Accédez à votre espace client en vous inscrivant ou en vous connectant. Une erreur est survenue : $(error-orig) — merci de contacter notre support technique.
